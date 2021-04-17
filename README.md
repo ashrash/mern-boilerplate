@@ -1,1 +1,1 @@
-# mern-boilerplate
+# MERN stack boilerplate
