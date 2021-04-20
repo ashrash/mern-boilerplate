@@ -1,0 +1,22 @@
+{
+    "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "useBuiltIns": "entry"
+          }
+        ]
+      ],
+    "plugins": [
+      "react-hot-loader/babel",
+      [
+        "babel-plugin-react-css-modules",
+        {
+          "context": "./src",
+          "generateScopedName": "[name]",
+          "handleMissingStyleName": "throw",
+          "webpackHotModuleReloading": true
+        }
+      ]
+    ]
+  }
