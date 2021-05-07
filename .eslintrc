@@ -3,11 +3,16 @@
         "react"
     ],
     "extends": [
+        "airbnb",
         "eslint:recommended",
         "plugin:react/recommended"
     ],
     "rules": {
-       "react/no-set-state": "off"
+        "import/no-extraneous-dependencies": [
+            "error", {
+               "devDependencies": true
+            }
+        ]
     },
     "parserOptions": {
         "ecmaVersion": 2020,
@@ -20,5 +25,5 @@
         "browser": true,
         "node": true,
         "es2020": true
-    }
+    }  
 }
