@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -51,53 +50,15 @@ module.exports = {
             },
           },
           {
-            test: /\.css$/,
+            test: /\.s[ac]ss$/i,
             use: [
-              MiniCssExtractPlugin.loader,
-              'css-loader',
+              // Creates `style` nodes from JS strings
+              "style-loader",
+              // Translates CSS into CommonJS
+              "css-loader",
+              // Compiles Sass to CSS
+              "sass-loader",
             ],
-          },
-          {
-            test: /\.scss/,
-            use: [
-              MiniCssExtractPlugin.loader,
-              'sass-loader',
-            ],
-          },
-          {
-            test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'url-loader',
-            options: {
-              limit: 10000,
-              mimetype: 'application/font-woff',
-            },
-          },
-          {
-            test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'url-loader',
-            options: {
-              limit: 10000,
-              mimetype: 'application/octet-stream',
-            },
-          },
-          {
-            test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'file-loader',
-          },
-          {
-            test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'url-loader',
-            options: {
-              limit: 10000,
-              mimetype: 'image/svg+xml',
-            },
-          },
-          {
-            test: /\.(png|jpg|gif|woff|woff2)$/,
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-            },
           },
           {
             test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
@@ -106,10 +67,6 @@ module.exports = {
         ],
       },
       plugins: [
-        new MiniCssExtractPlugin({
-          filename: 'app.css',
-          chunkFilename: 'app.css',
-        }),
         new ESLintPlugin({
           extensions: ['js', 'jsx']
         }),
