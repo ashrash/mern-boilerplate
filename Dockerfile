@@ -1,7 +1,7 @@
 #Multi-stage build 
 
 #Build stage
-FROM alpine:3.10 as builder 
+FROM node:14.17-alpine3.10 as builder 
 
 COPY . /app
 WORKDIR /app
@@ -12,7 +12,7 @@ EXPOSE 8080
 
 
 #Deployment stage 
-FROM alpine:3.10
+FROM node:14.17-alpine3.10
 
 COPY --from=builder /app/dist/ /opt/app/
 COPY package.json package-lock /opt/app/

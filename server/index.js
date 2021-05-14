@@ -1,0 +1,44 @@
+const express = require('express');
+const { logger, expressWinston } = require('./lib/winston');
+
+const routes = require('./routes');
+
+const app = express();
+
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(expressWinston);
+app.use('/public', express.static('public', {
+  redirect: false,
+}));
+
+routes(app);
+
+app.get('*', (req, res) => {
+  res.render('index');
+});
+
+app.use((req, res, next) => {
+  const error = new Error('Not Found');
+  error.status = 404;
+  next(error);
+});
+
+app.use((error, req, res) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message,
+    },
+  });
+});
+
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, (error) => {
+  if (error) {
+    logger.error(error);
+  } else {
+    logger.info(`==> 🌎 Listening on port ${PORT}. Open up http://localhost:${PORT}/ in your browser.`);
+  }
+});
