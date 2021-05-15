@@ -1,5 +1,5 @@
 # MERN stack boilerplate
 
-React
-Express
+Reactjs
+Expressjs
 Mongo DB
