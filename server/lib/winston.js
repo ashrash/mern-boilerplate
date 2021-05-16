@@ -48,4 +48,6 @@ const contextLogger = new WinstonContext(logger, '', {
   requestId: (Math.random() * 1e20).toString(36),
 });
 
-module.exports = contextLogger;
+module.exports = {
+  logger: contextLogger,
+};

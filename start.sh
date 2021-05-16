@@ -1,0 +1,1 @@
+export LOG_PREFIX='Mernboilerplate:'

@@ -1,5 +1,6 @@
 const express = require('express');
-const { logger, expressWinston } = require('./lib/winston');
+const path = require('path');
+const { logger } = require('./lib/winston');
 
 const routes = require('./routes');
 
@@ -7,10 +8,12 @@ const app = express();
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
-app.use(expressWinston);
 app.use('/public', express.static('public', {
   redirect: false,
 }));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
 routes(app);
 
@@ -33,7 +36,7 @@ app.use((error, req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, (error) => {
   if (error) {
