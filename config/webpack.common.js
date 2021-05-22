@@ -15,7 +15,7 @@ module.exports = {
   context: srcPath,
   output: {
     path: path.join(__dirname, '../dist'),
-    filename: 'static/js/[name].[hash].js',
+    filename: 'static/js/[name].js',
     publicPath,
   },
   resolve: {
@@ -72,6 +72,10 @@ module.exports = {
         from: path.join(__dirname, '../public/'),
         to: path.join(__dirname, '../dist/'),
         noErrorOnMissing: true,
+      },
+      {
+        from: path.join(__dirname, '../server/'),
+        to: path.join(__dirname, '../dist/'),
       }],
     }),
     new HtmlWebpackPlugin({

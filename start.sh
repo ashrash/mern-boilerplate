@@ -1,1 +1,1 @@
-export LOG_PREFIX='Mernboilerplate:'
+export LOG_PREFIX='Toggle-anything:'

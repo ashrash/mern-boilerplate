@@ -1,4 +1,4 @@
-# MERN stack boilerplate
+# Toggle Anything
 
 Reactjs
 Expressjs
