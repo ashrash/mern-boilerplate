@@ -9,7 +9,7 @@
     "prestart": "pm2 startOrReload ./server/ecosystem.config.js",
     "build": "webpack --config ./config/webpack.prod.js"
   },
-  "author": "",
+  "author": "ashwinr",
   "license": "ISC",
   "dependencies": {
     "clean-webpack-plugin": "*",
