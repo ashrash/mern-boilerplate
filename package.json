@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve --config=\"./config/webpack.local.js\" --open  --hot --host 127.0.0.1 --port 8080",
-    "prestart": "pm2 startOrReload ./server/ecosystem.config.js",
+    "dev": "webpack serve --config=\"./config/webpack.local.js\" --open  --hot --host 127.0.0.1 --port 8080",
+    "server": "node ./server",
     "build": "webpack --config ./config/webpack.prod.js"
   },
   "author": "ashwinr",
