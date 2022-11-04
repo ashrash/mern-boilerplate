@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "/Users/aramamurth/mern-boilerplate/server/lib/debug/.b25f502259f1aa6f8ece1fb18052dcc6846f4915-audit.json",
+    "files": [
+        {
+            "date": 1667576353644,
+            "name": "/Users/aramamurth/mern-boilerplate/server/lib/debug/2022-11-04.log",
+            "hash": "f8a0184b559d81bc92f2f92e93ca58bb78ef2eb1714f46097a8d893013df6e25"
+        }
+    ],
+    "hashType": "sha256"
+}

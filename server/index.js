@@ -1,50 +1,61 @@
-const express = require('express');
-const path = require('path');
-const { logger } = require('./lib/winston');
+import App from './app';
+import ProductRoute from './routes/product.route';
+import HealthRoute from './routes/health.route';
 
-const routes = require('./routes');
+const app = new App([new HealthRoute(), new ProductRoute()]);
 
-const app = express();
+app.listen();
 
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
+export default app;
 
-// app.use(express.static(path.resolve(__dirname, '../dist/')));
+// const express = require('express');
+// const path = require('path');
+// const { logger } = require('./lib/winston');
+// require('./config/mongodb');
 
-app.use('/', express.static('static', {
-  redirect: false,
-}));
+// const routes = require('./routes');
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+// const app = express();
 
-routes(app);
+// app.use(express.json({ limit: '50mb' }));
+// app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-app.get('*', (req, res) => {
-  res.render('index');
-});
+// // app.use(express.static(path.resolve(__dirname, '../dist/')));
 
-app.use((req, res, next) => {
-  const error = new Error('Not Found');
-  error.status = 404;
-  next(error);
-});
+// app.use('/', express.static('static', {
+//   redirect: false,
+// }));
 
-app.use((error, req, res) => {
-  res.status(error.status || 500);
-  res.json({
-    error: {
-      message: error.message,
-    },
-  });
-});
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'pug');
 
-const PORT = process.env.PORT || 3000;
+// routes(app);
 
-app.listen(PORT, (error) => {
-  if (error) {
-    logger.error(error);
-  } else {
-    logger.info(`==> 🌎 Listening on port ${PORT}. Open up http://localhost:${PORT}/ in your browser.`);
-  }
-});
+// app.get('*', (req, res) => {
+//   res.render('index');
+// });
+
+// app.use((req, res, next) => {
+//   const error = new Error('Not Found');
+//   error.status = 404;
+//   next(error);
+// });
+
+// app.use((error, req, res) => {
+//   res.status(error.status || 500);
+//   res.json({
+//     error: {
+//       message: error.message,
+//     },
+//   });
+// });
+
+// const PORT = process.env.PORT || 3000;
+
+// app.listen(PORT, (error) => {
+//   if (error) {
+//     logger.error(error);
+//   } else {
+//     logger.info(`==> 🌎 Listening on port ${PORT}. Open up http://localhost:${PORT}/ in your browser.`);
+//   }
+// });
