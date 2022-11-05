@@ -6,7 +6,9 @@ const DELETE_PRODUCT = 'app/product/DELETE_PRODUCT';
 
 const EDIT_PRODUCT = 'app/product/EDIT_PRODUCT';
 
-const SET_ERROR = 'app/product/DELETE_PRODUCT';
+const SET_ERROR = 'app/product/SET_ERROR';
+
+const TOGGLE_MODAL = 'app/product/TOGGLE_MODAL';
 
 export default {
   ADD_PRODUCT,
@@ -15,4 +17,5 @@ export default {
   DELETE_PRODUCT,
   EDIT_PRODUCT,
   SET_ERROR,
+  TOGGLE_MODAL,
 };

@@ -9,6 +9,11 @@
             "date": 1667576353645,
             "name": "/Users/aramamurth/mern-boilerplate/server/lib/error/2022-11-04.log",
             "hash": "abd6c66e5ed2c92b0f19b2651a6fc68c7f833f5b7cacc42085de6680a91aeabd"
+        },
+        {
+            "date": 1667634319404,
+            "name": "/Users/aramamurth/mern-boilerplate/server/lib/error/2022-11-05.log",
+            "hash": "3eb298e6e096bb07664e2561761999080ae239e89dac799b5dd5b34ee70f5eb0"
         }
     ],
     "hashType": "sha256"

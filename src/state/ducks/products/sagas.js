@@ -7,11 +7,13 @@ import Types from './types';
 
 function* getAllProducts() {
   try {
-    const response = yield call(axios.get, '/products/all');
+    const response = yield call(axios.get, '/product/all');
     const { data } = response;
     if (data) {
       yield put({ type: Types.SET_PRODUCT_DATA, payload: data });
+      yield put({ type: Types.SET_ERROR, payload: '' });
     } else {
+      yield put({ type: Types.SET_PRODUCT_DATA, payload: [] });
       yield put({ type: Types.SET_ERROR, payload: 'Data not found' });
     }
   } catch (e) {
@@ -23,7 +25,7 @@ function* addProduct(request) {
   try {
     const { name, price } = request.payload;
     const payload = { name, price };
-    const response = yield call(axios.post, '/api/products', payload);
+    const response = yield call(axios.post, '/product', payload);
     const { data } = response;
     if (data) {
       yield call(getAllProducts);
@@ -39,7 +41,7 @@ function* editProduct(request) {
   try {
     const { _id, name, price } = request.payload;
     const payload = { name, price };
-    const response = yield call(axios.put, `/api/products/${_id}`, payload);
+    const response = yield call(axios.put, `/product/${_id}`, payload);
     const { data } = response;
     if (data) {
       yield call(getAllProducts);
@@ -54,14 +56,13 @@ function* editProduct(request) {
 function* deleteProduct(request) {
   try {
     const { _id } = request.payload;
-    const response = yield call(axios.delete, `/api/products/${_id}`);
+    const response = yield call(axios.delete, `/product/${_id}`);
     const { data } = response;
     if (data) {
       yield call(getAllProducts);
     } else {
       yield put({ type: Types.SET_ERROR, payload: 'Data not found' });
     }
-    yield put({ type: Types.SET_PRODUCT_DATA, payload: data });
   } catch (e) {
     yield put({ type: Types.SET_ERROR, payload: 'Exception in deleting a product' });
   }

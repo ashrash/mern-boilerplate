@@ -15,7 +15,9 @@ const config = merge(
       hot: true,
       port,
       proxy: {
-        '*': 'http://localhost:7400',
+        '/product': 'http://localhost:3000/',
+        secure: false,
+        changeOrigin: true,
       },
       publicPath: '/',
       noInfo: false,
