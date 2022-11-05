@@ -4,7 +4,7 @@ import {
 } from 'redux-saga/effects';
 import axios from 'axios';
 import * as R from 'ramda';
-import Types from './types';
+import { FETCH_IMAGES, STORE_IMAGES, SET_ERROR } from './types';
 
 function* getImages() {
   try {
@@ -20,24 +20,27 @@ function* getImages() {
         } = item;
         const hasData = R.all((data) => !R.isNil(data))([farm, server, id, secret]);
         if (hasData) {
-          return `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`;
+          return {
+            img: `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`,
+            title: `${id}_${secret}.jpg`,
+          };
         }
         return null;
       });
-      const photoUrlList = R.reject((data) => !R.isNil(data), result);
-      yield put({ type: Types.SET_PRODUCT_DATA, payload: photoUrlList });
-      yield put({ type: Types.SET_ERROR, payload: '' });
+      const photoUrlList = R.reject(R.isNil, result);
+      yield put({ type: STORE_IMAGES, payload: photoUrlList });
+      yield put({ type: SET_ERROR, payload: '' });
     } else {
-      yield put({ type: Types.SET_PRODUCT_DATA, payload: [] });
-      yield put({ type: Types.SET_ERROR, payload: 'Data not found' });
+      yield put({ type: STORE_IMAGES, payload: [] });
+      yield put({ type: SET_ERROR, payload: 'Data not found' });
     }
   } catch (e) {
-    yield put({ type: Types.SET_ERROR, payload: 'Exception in listing all products' });
+    yield put({ type: SET_ERROR, payload: 'Exception in listing all products' });
   }
 }
 
 function* watchGetImages() {
-  yield takeEvery(Types.FETCH_IMAGES, getImages);
+  yield takeEvery(FETCH_IMAGES, getImages);
 }
 
 export function* combinedSaga() {

@@ -1,11 +1,8 @@
-import Types from './types';
+import { FETCH_IMAGES } from './types';
 
-const getImagesFromFlicker = () => {
-  console.log(Types);
-  return {
-    type: Types.FETCH_IMAGES,
-  };
-};
+const getImagesFromFlicker = () => ({
+  type: FETCH_IMAGES,
+});
 
 export default {
   getImagesFromFlicker,

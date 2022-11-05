@@ -1,15 +1,15 @@
-import Types from './types';
+import { STORE_IMAGES, SET_ERROR } from './types';
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
-    case Types.STORE_IMAGES: {
+    case STORE_IMAGES: {
       const data = action.payload;
       return {
         ...state,
         imageData: data,
       };
     }
-    case Types.SET_ERROR: {
+    case SET_ERROR: {
       const error = action.payload;
       return {
         ...state,
