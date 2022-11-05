@@ -5,7 +5,7 @@ const getProducts = (state) => R.pathOr([], ['products', 'data'], state);
 
 const getModalState = (state) => R.pathOr(false, ['products', 'modal'], state);
 
-const getErrorMessage = (state) => R.pathOr(false, ['products', 'error'], state);
+const getErrorMessage = (state) => R.pathOr('', ['products', 'error'], state);
 
 export default {
   getProducts,

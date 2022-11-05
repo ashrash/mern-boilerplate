@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -89,7 +88,7 @@ export default function Popup({
             Close
           </Button>
           <Button
-            color={R.pathOr('primary', ['button', title, 'color'], Op)}
+            color={R.pathOr('primary', ['modalConfig', title, 'color'], Op)}
             variant="contained"
             onClick={() => handleSubmit(title, {
               _id: data._id,
@@ -97,7 +96,7 @@ export default function Popup({
               price: priceField,
             })}
           >
-            {R.pathOr('Submit', ['button', title, 'text'], Op)}
+            {R.pathOr('Submit', ['modalConfig', title, 'text'], Op)}
           </Button>
         </Box>
       </Modal>

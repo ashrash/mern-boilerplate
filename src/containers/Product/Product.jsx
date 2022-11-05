@@ -10,10 +10,12 @@ import { selectors, actions } from '../../state/ducks/products/index';
 import getColumns from '../../constants/TableHeader';
 import Popup from '../../components/Popup';
 import Op from '../../constants/operations';
-import './App.scss';
+import './Product.scss';
 
-const { EDIT, ADD, DELETE } = Op;
-class App extends React.PureComponent {
+const {
+  EDIT, ADD, DELETE, modalConfig,
+} = Op;
+class Product extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,24 +42,9 @@ class App extends React.PureComponent {
 
   handleSubmit = (operation, data) => {
     const {
-      editProduct, addProduct, deleteProduct, toggleModal,
+      toggleModal, [modalConfig[operation].onSubmit]: fn,
     } = this.props;
-    switch (operation) {
-      case EDIT: {
-        editProduct(data);
-        break;
-      }
-      case ADD: {
-        addProduct(data);
-        break;
-      }
-      case DELETE: {
-        deleteProduct(data);
-        break;
-      }
-      default:
-        toggleModal(false);
-    }
+    fn(data);
     toggleModal(false);
   }
 
@@ -111,11 +98,11 @@ const mapStateToProps = (state) => ({
   errorMessage: selectors.getErrorMessage(state),
 });
 
-App.defaultProps = {
+Product.defaultProps = {
   errorMessage: '',
 };
 
-App.propTypes = {
+Product.propTypes = {
   getAllProducts: PropTypes.func.isRequired,
   toggleModal: PropTypes.func.isRequired,
   editProduct: PropTypes.func.isRequired,
@@ -126,6 +113,6 @@ App.propTypes = {
   errorMessage: PropTypes.string,
 };
 
-const container = connect(mapStateToProps, mapDispatchToProps)(App);
+const container = connect(mapStateToProps, mapDispatchToProps)(Product);
 
 export default container;
